@@ -5,8 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DateAppPC.EXPL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Closed="AppClosed">
     <Grid>
+        <Grid x:Name="Registration">
+            <Canvas Background="Aqua" Visibility="Visible">
+                <Label Margin="295,65,0,0" FontSize="25"> Логин: </Label>
+                <TextBox x:Name="Login" Height="30" Width="200" Margin="300,120,0,0" FontSize="20"> ЛОГИН </TextBox>
+                
+                <Label Margin="295,165,0,0" FontSize="25"> Пароль: </Label>
+                <TextBox x:Name="Password" Height="30" Width="200" Margin="300,220,0,0" FontSize="20"> ПАРОЛЬ </TextBox>
+                
+                <Button Height="50" Width="200" Margin="300,260,0,0" FontSize="30" Click="Enter"> ВОЙТИ </Button>
+            </Canvas>
+        </Grid>
+        <Grid x:Name = "Profile" Visibility="Hidden">
+            <Canvas Width="200" HorizontalAlignment="Left" Background="Azure"></Canvas>
+            <Image Stretch="Fill" x:Name = "ProfileImage" Height="200" Width="200" HorizontalAlignment="Left" VerticalAlignment="Top" Source=""></Image>
+            <Label x:Name = "UserName" FontSize="15" Margin="0,200,0,0"> Имя: </Label>
+            <Label x:Name = "NickName" FontSize="15" Margin="0,225,0,0"> Ник: </Label>
+            <Label x:Name = "Age" FontSize="15" Margin="0,250,0,0"> 20 лет </Label>
+            <Button Width="100" Height="25" FontSize="10" Margin="0,300,600,0" Click="SetProfile">Изменить профиль</Button>
+        </Grid>
+        <ScrollViewer x:Name = "ScrollProfiles" Width="600" HorizontalAlignment="Right" Visibility="Hidden">
+            <Grid Height="450">
+                <Canvas Background="Beige" Width="500" Height="300">
+                    <Image Source="" Height="300" Margin="0,0,200,0"></Image>
+                    <Label FontSize="20" Margin="300,0,0,0"> Имя: Жёлтое </Label>
+                    <Label FontSize="15" Margin="300,30,0,0"> Интересы: Стаканчики </Label>
+                    <Button Height="25" Width="50" Margin="450,275,0,0"> ЛАЙК </Button>
+                </Canvas>
+            </Grid>
+        </ScrollViewer>
+        <Grid x:Name="Filters" Visibility="Hidden">
+            <Button  Width="100" Height="25" FontSize="10" Margin="0,0,225,350"> ВЫБРАННЫЕ ВАМИ </Button>
+            <Button  Width="100" Height="25" FontSize="10" Margin="210,0,225,350"> КТО ВЫБРАЛ ВАС </Button>
+            <Button  Width="100" Height="25" FontSize="10" Margin="420,0,225,350"> СОВПАДЕНИЯ </Button>
+        </Grid>
 
     </Grid>
 </Window>
