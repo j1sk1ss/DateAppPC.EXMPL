@@ -5,18 +5,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:DateAppPC.EXPL.WINDOWS"
         mc:Ignorable="d"
-        Title="UserInfo" Height="450" Width="800"
-        Closed="ClosedWindow">
+        Title="UserInfo" Height="500" Width="800"
+        Closed="ClosedWindow"
+        ResizeMode="NoResize">
     <Grid>
-        <Label FontSize="20" Margin="0,0,0,0"> Имя: </Label>
-        <Label FontSize="20" Margin="0,70,0,0"> Ник: </Label>
-        <Label FontSize="20" Margin="0,140,0,0"> Интересы (Через запятую): </Label>
-        <Label FontSize="20" Margin="0,210,0,0"> О себе: </Label>
-        <TextBox x:Name = "UserName" Height="40" VerticalAlignment="Top"  Margin="0,35,0,0"></TextBox>
-        <TextBox x:Name = "NickName" Height="40" VerticalAlignment="Top"  Margin="0,105,0,0"></TextBox>
-        <TextBox x:Name = "Interests" Height="40" VerticalAlignment="Top"  Margin="0,175,0,0"></TextBox>
-        <TextBox x:Name = "Info" Height="100" VerticalAlignment="Top"  Margin="0,245,0,0"></TextBox>
-        <Button Height="50" Width="200" Margin="550,350,0,0" Click="PictureChose"> ВЫБРАТЬ КАРТИНКУ ПРОФИЛЯ</Button>
-        <DatePicker x:Name="Age" VerticalAlignment="Bottom" Width="200" Margin="550,0,0,75" > </DatePicker>
+        <Grid x:Name="Preview">
+            <Grid Height="450" Margin="245,0,0,0">
+                <Canvas Background="Beige" Width="500" Height="300">
+                    <Image x:Name = "PreviewPicture" Source="" Height="300" Margin="0,0,200,0"></Image>
+                    <Label x:Name="PreviewName" FontSize="20" Margin="300,0,0,0"
+                           Content="{Binding ElementName=UserName, Path=Text}"></Label>
+                    <Label x:Name="PreviewInterests" FontSize="15" Margin="300,30,0,0"
+                           Content="{Binding ElementName=Interests, Path=Text}"></Label>
+                    <Label x:Name="PreviewBio" FontSize="15" Margin="300,90,0,0"
+                           Content="{Binding ElementName=Info, Path=Text}"></Label>
+                </Canvas>
+            </Grid>
+        </Grid>
+        <Grid x:Name = "ProfileSetter">
+            <Canvas Background="Beige" Width="250" HorizontalAlignment="Left"></Canvas>
+            <Label FontSize="15" Margin="0,0,0,0"> Имя: </Label>
+            <Label FontSize="15" Margin="0,55,0,0"> Ник: </Label>
+            <Label FontSize="15" Margin="0,110,0,0"> Интересы (Через запятую): </Label>
+            <Label FontSize="15" Margin="0,165,0,0"> О себе: </Label>
+            
+            <TextBox x:Name = "UserName" Height="20" VerticalAlignment="Top"  Margin="0,35,550,0"></TextBox>
+            <TextBox x:Name = "NickName" Height="20" VerticalAlignment="Top"  Margin="0,90,550,0"></TextBox>
+            <TextBox x:Name = "Interests" Height="20" VerticalAlignment="Top"  Margin="0,145,550,0"></TextBox>
+            <TextBox x:Name = "Info" Height="20" VerticalAlignment="Top"  Margin="0,205,550,0"></TextBox>
+            
+            <Button x:Name = "PictureChooser" Height="20" Width="100" Margin="0,130,600,0" Click="PictureChose" FontSize="6"> ВЫБРАТЬ КАРТИНКУ ПРОФИЛЯ</Button>
+            <DatePicker x:Name="Age" VerticalAlignment="Bottom" Width="200" Margin="0,0,600,190" > </DatePicker>  
+        </Grid>
     </Grid>
 </Window>

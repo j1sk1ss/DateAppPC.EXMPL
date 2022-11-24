@@ -3,20 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DateAppPC.EXPL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        Closed="AppClosed">
+        Title="MainWindow" Height="500" Width="810"
+        Closed="AppClosed"
+        ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="Registration">
-            <Canvas Background="Aqua" Visibility="Visible">
-                <Label Margin="295,65,0,0" FontSize="25"> Логин: </Label>
-                <TextBox x:Name="Login" Height="30" Width="200" Margin="300,120,0,0" FontSize="20"> ЛОГИН </TextBox>
-                
-                <Label Margin="295,165,0,0" FontSize="25"> Пароль: </Label>
-                <TextBox x:Name="Password" Height="30" Width="200" Margin="300,220,0,0" FontSize="20"> ПАРОЛЬ </TextBox>
-                
-                <Button Height="50" Width="200" Margin="300,260,0,0" FontSize="30" Click="Enter"> ВОЙТИ </Button>
+            <Canvas Background="Beige" Visibility="Visible">
+                <Grid VerticalAlignment="Center" Margin="0,0,0,0" Height="450" Width="800">
+                    <Canvas Background="Bisque" Width="200" HorizontalAlignment="Right" Height="2000"></Canvas>
+                    <Label Margin="595,75,0,0" FontSize="15"> Логин: </Label>
+                    <TextBox x:Name="Login" Height="30" Width="200" Margin="600,0,0,190" FontSize="15">  </TextBox>
+                    <Label Margin="595,175,0,0" FontSize="15"> Пароль: </Label>
+                    <TextBox x:Name="Password" Height="30" Width="200" Margin="600,10,0,0" FontSize="15">  </TextBox>
+                    <Button Height="25" Width="100" Margin="700,100,0,0" FontSize="15" Click="Enter"> ВОЙТИ </Button>  
+                </Grid>
             </Canvas>
         </Grid>
         <Grid x:Name = "Profile" Visibility="Hidden">
@@ -25,11 +26,11 @@
             <Label x:Name = "UserName" FontSize="15" Margin="0,200,0,0"> Имя: </Label>
             <Label x:Name = "NickName" FontSize="15" Margin="0,225,0,0"> Ник: </Label>
             <Label x:Name = "Age" FontSize="15" Margin="0,250,0,0"> 20 лет </Label>
-            <Button Width="100" Height="25" FontSize="10" Margin="0,300,600,0" Click="SetProfile">Изменить профиль</Button>
+            <Button Width="100" Height="25" FontSize="10" Margin="0,400,600,0" Click="SetProfile">Изменить профиль</Button>
         </Grid>
         <ScrollViewer x:Name = "ScrollProfiles" Width="600" HorizontalAlignment="Right" Visibility="Hidden">
             <Grid Height="450">
-                <Canvas Background="Beige" Width="500" Height="300">
+                <Canvas Background="Beige" Width="500" Height="300"> 
                     <Image Source="" Height="300" Margin="0,0,200,0"></Image>
                     <Label FontSize="20" Margin="300,0,0,0"> Имя: Жёлтое </Label>
                     <Label FontSize="15" Margin="300,30,0,0"> Интересы: Стаканчики </Label>
@@ -42,6 +43,5 @@
             <Button  Width="100" Height="25" FontSize="10" Margin="210,0,225,350"> КТО ВЫБРАЛ ВАС </Button>
             <Button  Width="100" Height="25" FontSize="10" Margin="420,0,225,350"> СОВПАДЕНИЯ </Button>
         </Grid>
-
     </Grid>
 </Window>
