@@ -53,8 +53,8 @@ namespace DateAppPC.EXPL.WINDOWS {
         }
         private void PictureChose(object sender, RoutedEventArgs e) {
             var openFileDialog = new OpenFileDialog {
-                Filter = "jpg files (*.jpg)|*.jpg|All files (*.*)|*.*",
-                FilterIndex = 2,
+                Filter           = "jpg files (*.jpg)|*.jpg|All files (*.*)|*.*",
+                FilterIndex      = 2,
                 RestoreDirectory = true
             };
             if (openFileDialog.ShowDialog() != true) return;
