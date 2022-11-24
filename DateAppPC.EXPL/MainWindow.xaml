@@ -29,11 +29,12 @@
             <Button Width="100" Height="25" FontSize="10" Margin="0,400,600,0" Click="SetProfile">Изменить профиль</Button>
         </Grid>
         <ScrollViewer x:Name = "ScrollProfiles" Width="600" HorizontalAlignment="Right" Visibility="Hidden">
-            <Grid Height="450">
+            <Grid x:Name="ProfilesGrid" Height="450">
                 <Canvas Background="Beige" Width="500" Height="300"> 
                     <Image Source="" Height="300" Margin="0,0,200,0"></Image>
-                    <Label FontSize="20" Margin="300,0,0,0"> Имя: Жёлтое </Label>
-                    <Label FontSize="15" Margin="300,30,0,0"> Интересы: Стаканчики </Label>
+                    <Label FontSize="20" Margin="300,0,0,0"> Имя:</Label>
+                    <Label FontSize="15" Margin="300,30,0,0"> Интересы: </Label>
+                    
                     <Button Height="25" Width="50" Margin="450,275,0,0"> ЛАЙК </Button>
                 </Canvas>
             </Grid>

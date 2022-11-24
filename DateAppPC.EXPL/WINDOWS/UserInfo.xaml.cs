@@ -9,6 +9,8 @@ using Microsoft.Win32;
 
 namespace DateAppPC.EXPL.WINDOWS {
     public partial class UserInfo : Window {
+        private const string DefaultLogo = 
+            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
         public UserInfo(MainWindow mainWindow, User user) {
             InitializeComponent();
 
@@ -26,14 +28,22 @@ namespace DateAppPC.EXPL.WINDOWS {
         private string LinkToPicture { get; set; }
         private User User { get; set; }
         private void ClosedWindow(object sender, EventArgs e) {
+            if (MainWindow.UsersData.Users.Any(user => user.Nick == NickName.Text)) {
+                MessageBox.Show("Никнейм уже занят!");
+                return;
+            }
+            
             User.Name      = UserName.Text;
             User.Nick      = NickName.Text;
             User.Info      = Info.Text;
             User.Interests = Interests.Text.Replace(" ", "").Split(",").ToList();
-            
-            var link = $"C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\" +
-                       $"DateAppPC.EXPL\\IMAGES\\{UserName.Text}_{NickName.Text}.jpg";
-            File.Copy(LinkToPicture, link, true);
+
+            string link = null;
+            if (LinkToPicture != null) {
+                link = $"C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\" +
+                           $"DateAppPC.EXPL\\IMAGES\\{UserName.Text}_{NickName.Text}.jpg";
+                File.Copy(LinkToPicture, link, true);
+            }
             
             User.ProfileImage = link;
             User.DateOfBirth  = Age.DisplayDate;

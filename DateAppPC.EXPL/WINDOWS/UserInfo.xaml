@@ -12,12 +12,14 @@
         <Grid x:Name="Preview">
             <Grid Height="450" Margin="245,0,0,0">
                 <Canvas Background="Beige" Width="500" Height="300">
-                    <Image x:Name = "PreviewPicture" Source="" Height="300" Margin="0,0,200,0"></Image>
+                    <Image Stretch="Fill" x:Name = "PreviewPicture" Source="" Height="300" Margin="0,0,200,0"></Image>
+                    <Label FontSize="10" Margin="300,23,0,0"> Интересы: </Label>
                     <Label x:Name="PreviewName" FontSize="20" Margin="300,0,0,0"
                            Content="{Binding ElementName=UserName, Path=Text}"></Label>
-                    <Label x:Name="PreviewInterests" FontSize="15" Margin="300,30,0,0"
+                    <Label x:Name="PreviewInterests" FontSize="10" Margin="300,30,0,0"
                            Content="{Binding ElementName=Interests, Path=Text}"></Label>
-                    <Label x:Name="PreviewBio" FontSize="15" Margin="300,90,0,0"
+                    <Label FontSize="10" Margin="300,80,0,0"> О себе: </Label>
+                    <Label x:Name="PreviewBio" FontSize="10" Margin="300,90,0,0"
                            Content="{Binding ElementName=Info, Path=Text}"></Label>
                 </Canvas>
             </Grid>
