@@ -3,14 +3,11 @@ using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using DateAppPC.EXPL.ANIMATIONS;
 using DateAppPC.EXPL.OBJECTS;
 using Microsoft.Win32;
 
 namespace DateAppPC.EXPL.WINDOWS {
     public partial class UserInfo : Window {
-        private const string DefaultLogo = 
-            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
         public UserInfo(MainWindow mainWindow, User user) {
             InitializeComponent();
 
@@ -40,7 +37,7 @@ namespace DateAppPC.EXPL.WINDOWS {
 
             string link = null;
             if (LinkToPicture != null) {
-                link = $"C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\" +
+                link = "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\" +
                            $"DateAppPC.EXPL\\IMAGES\\{UserName.Text}_{NickName.Text}.jpg";
                 File.Copy(LinkToPicture, link, true);
             }

@@ -13,10 +13,23 @@
     <ItemGroup>
       <None Remove="IMAGES\O81QexGxfzI.jpg" />
       <None Remove="IMAGES\OVvsmsA6MDY.jpg" />
+      <None Remove="ANIMATIONS\**" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta3" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="ANIMATIONS\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="ANIMATIONS\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Remove="ANIMATIONS\**" />
     </ItemGroup>
 
 </Project>

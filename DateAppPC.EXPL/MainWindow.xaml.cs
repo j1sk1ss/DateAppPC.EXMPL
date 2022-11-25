@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace DateAppPC.EXPL {
     public partial class MainWindow : Window {
         private const string DataBaseLocation = 
-                        "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\DATA\\DataBase.json";
+            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\DATA\\DataBase.json";
         private const string DefaultLogo = 
             "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
         public MainWindow() {
@@ -22,10 +22,9 @@ namespace DateAppPC.EXPL {
             User      = new User();
             
             if (!File.Exists(DataBaseLocation)) return;
-            
             UsersData = JsonConvert.DeserializeObject<UsersData>(File.ReadAllText(DataBaseLocation));
         }
-        public UsersData UsersData { get; set; }
+        public UsersData UsersData { get; }
         public User User { get; set; }
         private void Enter(object sender, RoutedEventArgs e) {
             foreach (var user in UsersData.Users.Where(user => user.Login == Login.Text)) {
@@ -40,10 +39,10 @@ namespace DateAppPC.EXPL {
                 return;
             }
             var k = MessageBox.Show("Аккаунт не зарегистрирован!", 
-                "Регистрация", MessageBoxButton.OKCancel);
+                "Регистрация?", MessageBoxButton.OKCancel);
             if (k != MessageBoxResult.OK) return;
             
-            User = new User() {
+            User = new User {
                 Password = Password.Text,
                 Login    = Login.Text
             };
@@ -71,7 +70,7 @@ namespace DateAppPC.EXPL {
             for (var i = 0; i < UsersData.Users.Count; i++) {
                 var user = UsersData.Users[i];
                 if (user == User) continue;
-                ProfilesGrid.Children.Add(profilesViewer.ShowProfile(user, this));
+                ProfilesGrid.Children.Add(ProfilesViewer.ShowProfile(user, this));
                 
                 var tempUserTemple = ProfilesGrid.Children[^1] as Canvas;
                 tempUserTemple!.VerticalAlignment = VerticalAlignment.Top;

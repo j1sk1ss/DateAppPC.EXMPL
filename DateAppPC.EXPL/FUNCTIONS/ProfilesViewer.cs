@@ -9,25 +9,25 @@ namespace DateAppPC.EXPL.FUNCTIONS {
     public class ProfilesViewer {
         private const string DefaultLogo = 
             "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
-        public Canvas ShowProfile(User user, MainWindow mainWindow) {
-            var tempCanvas = new Canvas() {
+        public static Canvas ShowProfile(User user, MainWindow mainWindow) {
+            var tempCanvas = new Canvas {
                 Background = Brushes.Beige,
                 Width      = 500,
                 Height     = 300,
                 Children   = {
-                    new Image() {
+                    new Image {
                        Source  = new BitmapImage(new Uri(user.ProfileImage ?? DefaultLogo)),
                        Height  = 300,
                        Width   = 300,
                        Margin  = new Thickness(0,0,200,0),
                        Stretch = Stretch.Fill
                     },
-                    new Label() {
+                    new Label {
                         FontSize = 20,
                         Margin   = new Thickness(300,0,0,0),
                         Content  = user.Name + ""
                     },
-                    new Label() {
+                    new Label {
                         FontSize = 15,
                         Margin   = new Thickness(300,0,0,0),
                         Content  = "\n \nИнтересы:\n" + string.Join(",", user.Interests) + 

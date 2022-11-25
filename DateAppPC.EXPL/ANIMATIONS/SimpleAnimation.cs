@@ -9,7 +9,6 @@ namespace DateAppPC.EXPL.ANIMATIONS {
             DoubleAnimation = new DoubleAnimation();
         }
         private DoubleAnimation DoubleAnimation { get; set; }
-
         public void MoveGrid(Grid grid, int firstPos, int secondPos, int duration) {
             DoubleAnimation.From       = firstPos;
             DoubleAnimation.To         = secondPos;
