@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using DateAppPC.EXPL.DATA;
+using DateAppPC.EXPL.DATA_BASE;
 using DateAppPC.EXPL.FUNCTIONS;
 using DateAppPC.EXPL.OBJECTS;
 using DateAppPC.EXPL.WINDOWS;
@@ -12,17 +14,14 @@ using Newtonsoft.Json;
 
 namespace DateAppPC.EXPL {
     public partial class MainWindow : Window {
-        private const string DataBaseLocation = 
-            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\DATA\\DataBase.json";
         private const string DefaultLogo = 
             "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
         public MainWindow() {
             InitializeComponent();
-            UsersData = new UsersData();
+            UsersData = new UsersData {
+                Users = new Connector().GetUsersData()
+            };
             User      = new User();
-            
-            if (!File.Exists(DataBaseLocation)) return;
-            UsersData = JsonConvert.DeserializeObject<UsersData>(File.ReadAllText(DataBaseLocation));
         }
         public UsersData UsersData { get; }
         public User User { get; set; }
@@ -33,7 +32,6 @@ namespace DateAppPC.EXPL {
                     return;
                 }
                 User = user;
-                UsersData.Users.Remove(user);
                 UpdateProfile();
                 CloseRegistration();
                 return;
@@ -46,7 +44,6 @@ namespace DateAppPC.EXPL {
                 Password = Password.Text,
                 Login    = Login.Text
             };
-            UsersData.Users.Add(User);
             CloseRegistration();
         }
         public void UpdateProfile() {
@@ -55,37 +52,40 @@ namespace DateAppPC.EXPL {
             NickName.Content    = User.Nick;
             Age.Content         = (DateTime.Now.Year - User.DateOfBirth.Year).ToString();
         }
-        private void SetProfile(object sender, RoutedEventArgs e) { 
-           UsersData.Users.Remove(User);
-           new UserInfo(this, User).Show();
+        private void SetProfile(object sender, RoutedEventArgs e) {
+            new UserInfo(this, User).Show();
         }
         private void CloseRegistration() {
-            Registration.Visibility   = Visibility.Hidden;
-            Profile.Visibility        = Visibility.Visible;
-            ScrollProfiles.Visibility = Visibility.Visible;
-            Filters.Visibility        = Visibility.Visible;
+            try {
+                Registration.Visibility   = Visibility.Hidden;
+                Profile.Visibility        = Visibility.Visible;
+                ScrollProfiles.Visibility = Visibility.Visible;
+                Filters.Visibility        = Visibility.Visible;
             
-            var profilesViewer = new ProfilesViewer();
-            ProfilesGrid.Height = 400 * UsersData.Users.Count;
-            for (var i = 0; i < UsersData.Users.Count; i++) {
-                var user = UsersData.Users[i];
-                if (user == User) continue;
-                ProfilesGrid.Children.Add(ProfilesViewer.ShowProfile(user, this));
+                ProfilesGrid.Height = 200 * UsersData.Users.Count;
+                for (var i = 0; i < UsersData.Users.Count; i++) {
+                    var user = UsersData.Users[i];
+                    if (user == User) continue;
+                    ProfilesGrid.Children.Add(ProfilesViewer.GetProfileCanvas(user, this));
                 
-                var tempUserTemple = ProfilesGrid.Children[^1] as Canvas;
-                tempUserTemple!.VerticalAlignment = VerticalAlignment.Top;
-                tempUserTemple!.Margin = new Thickness(0, 50 + i * 400, 0, 0);
+                    var tempUserTemple = ProfilesGrid.Children[^1] as Canvas;
+                    tempUserTemple!.VerticalAlignment = VerticalAlignment.Top;
+                    tempUserTemple!.Margin = new Thickness(0, i * 400, 0, 0);
+                }
+            }
+            catch (Exception e) {
+                MessageBox.Show($"{e}");
             }
         }
         private void AppClosed(object sender, EventArgs e) {
-            UsersData.Users.Add(User);
-            File.WriteAllText(DataBaseLocation, JsonConvert.SerializeObject(UsersData));
+            if (!UsersData.Users.Contains(User)) new Connector().SaveUserData(User);
+            else new Connector().ChangeUserData(User);
         }
-        public void Like(object sender, RoutedEventArgs e) {
+        public void AddToFavorite(object sender, RoutedEventArgs e) {
             var name = (sender as Button)!.Name;
             foreach (var user in UsersData.Users.Where(user => user.Name == name)) {
-                user.UsersChose.Add(User);
-                User.Chosen.Add(user);
+                user.UsersFavorite.Add(User.UserId);
+                User.Favorite.Add(user.UserId);
             }
         }
     }

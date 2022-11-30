@@ -7,10 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="IMAGES" />
-    </ItemGroup>
-
-    <ItemGroup>
       <None Remove="IMAGES\O81QexGxfzI.jpg" />
       <None Remove="IMAGES\OVvsmsA6MDY.jpg" />
       <None Remove="ANIMATIONS\**" />
@@ -18,6 +14,8 @@
 
     <ItemGroup>
       <PackageReference Include="Newtonsoft.Json" Version="13.0.2-beta3" />
+      <PackageReference Include="Npgsql" Version="7.0.0" />
+      <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     </ItemGroup>
 
     <ItemGroup>

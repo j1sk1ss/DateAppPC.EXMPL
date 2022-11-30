@@ -5,39 +5,134 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:DateAppPC.EXPL.WINDOWS"
         mc:Ignorable="d"
-        Title="UserInfo" Height="500" Width="800"
-        Closed="ClosedWindow"
+        Title="UserInfo" Height="550" Width="800"
         ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="Preview">
             <Grid Height="450" Margin="245,0,0,0">
-                <Canvas Background="Beige" Width="500" Height="300">
-                    <Image Stretch="Fill" x:Name = "PreviewPicture" Source="" Height="300" Margin="0,0,200,0"></Image>
-                    <Label FontSize="10" Margin="300,23,0,0"> Интересы: </Label>
-                    <Label x:Name="PreviewName" FontSize="20" Margin="300,0,0,0"
+                <Canvas Width="500" Height="300">
+                    <Image Stretch="Fill" 
+                           x:Name = "PreviewPicture" 
+                           Source="" 
+                           Height="300" 
+                           Margin="0,0,200,0"></Image>
+                    <Label FontSize="10" 
+                           Margin="300,23,0,0">
+                         Интересы:
+                    </Label>
+                    <Label x:Name="PreviewName" 
+                           FontSize="20" 
+                           Margin="300,0,0,0"
                            Content="{Binding ElementName=UserName, Path=Text}"></Label>
-                    <Label x:Name="PreviewInterests" FontSize="10" Margin="300,30,0,0"
+                    <Label x:Name="PreviewInterests" 
+                           FontSize="10"
+                           Margin="300,30,0,0"
                            Content="{Binding ElementName=Interests, Path=Text}"></Label>
-                    <Label FontSize="10" Margin="300,80,0,0"> О себе: </Label>
-                    <Label x:Name="PreviewBio" FontSize="10" Margin="300,90,0,0"
+                    <Label FontSize="10" 
+                           Margin="300,80,0,0">
+                         О себе:
+                    </Label>
+                    <Label x:Name="PreviewBio"
+                           FontSize="10" 
+                           Margin="300,90,0,0"
                            Content="{Binding ElementName=Info, Path=Text}"></Label>
+                    <Line X1 = "500" Y1 = "0"
+                          X2 = "500" Y2 = "300"
+                          Stroke="Black"
+                    ></Line>
+                    <Line X1 = "0" Y1 = "0"
+                          X2 = "0" Y2 = "300"
+                          Stroke="Black"
+                    ></Line>
+                    <Line X1 = "0" Y1 = "0"
+                          X2 = "500" Y2 = "0"
+                          Stroke="Black"
+                    ></Line>
+                    <Line X1 = "0" Y1 = "300"
+                          X2 = "500" Y2 = "300"
+                          Stroke="Black"
+                    ></Line>
                 </Canvas>
             </Grid>
         </Grid>
         <Grid x:Name = "ProfileSetter">
-            <Canvas Background="Beige" Width="250" HorizontalAlignment="Left"></Canvas>
-            <Label FontSize="15" Margin="0,0,0,0"> Имя: </Label>
-            <Label FontSize="15" Margin="0,55,0,0"> Ник: </Label>
-            <Label FontSize="15" Margin="0,110,0,0"> Интересы (Через запятую): </Label>
-            <Label FontSize="15" Margin="0,165,0,0"> О себе: </Label>
+            <Canvas Width="250" HorizontalAlignment="Left"></Canvas>
+            <Label FontSize="15" 
+                   Margin="0,0,0,0">
+                    Имя:
+            </Label>
+            <Label FontSize="15" 
+                   Margin="0,55,0,0">
+                    Ник:
+            </Label>
+            <Label FontSize="15"
+                   Margin="0,110,0,0">
+                    Интересы:
+            </Label>
+            <Label FontSize="15" 
+                   Margin="0,165,0,0">
+                    О себе:
+            </Label>
+            <Label FontSize="15" 
+                   Margin="0,235,0,0">
+                 Дата рождения:
+            </Label>
+            <Label FontSize="25" 
+                   Margin="0,0,0,0"
+                   HorizontalAlignment="Center">
+                 Быстрая анкета
+            </Label>
             
-            <TextBox x:Name = "UserName" Height="20" VerticalAlignment="Top"  Margin="0,35,550,0"></TextBox>
-            <TextBox x:Name = "NickName" Height="20" VerticalAlignment="Top"  Margin="0,90,550,0"></TextBox>
-            <TextBox x:Name = "Interests" Height="20" VerticalAlignment="Top"  Margin="0,145,550,0"></TextBox>
-            <TextBox x:Name = "Info" Height="20" VerticalAlignment="Top"  Margin="0,205,550,0"></TextBox>
+            <TextBox x:Name = "UserName" 
+                     Height="20" 
+                     VerticalAlignment="Top"  
+                     Margin="0,35,550,0"></TextBox>
+            <TextBox x:Name = "NickName" 
+                     Height="20" 
+                     VerticalAlignment="Top"  
+                     Margin="0,90,550,0"></TextBox>
+            <TextBox x:Name = "Interests" 
+                     Height="20" 
+                     VerticalAlignment="Top"  
+                     Margin="0,145,550,0"></TextBox>
+            <TextBox x:Name = "Info"
+                     Height="20" 
+                     VerticalAlignment="Top"  
+                     Margin="0,205,550,0"></TextBox>
             
-            <Button x:Name = "PictureChooser" Height="20" Width="100" Margin="0,130,600,0" Click="PictureChose" FontSize="6"> ВЫБРАТЬ КАРТИНКУ ПРОФИЛЯ</Button>
-            <DatePicker x:Name="Age" VerticalAlignment="Bottom" Width="200" Margin="0,0,600,190" > </DatePicker>  
+            <Button x:Name = "PictureChooser" 
+                    Height="20" 
+                    Width="100" 
+                    Margin="0,450,550,0" 
+                    Click="PictureChose" 
+                    FontSize="6">
+                 ВЫБРАТЬ КАРТИНКУ ПРОФИЛЯ
+            </Button>
+            <DatePicker x:Name="Age" 
+                        VerticalAlignment="Bottom" 
+                        Width="200" 
+                        Margin="0,0,550,190" >
+            </DatePicker>  
+            <Line X1 = "260" Y1 = "0"
+                  X2 = "260" Y2 = "500"
+                  Stroke="Black"
+            ></Line>
+            <Button Height="30"
+                    Width="200"
+                    Margin="400,10,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Click="ExtendedTest">
+                Пройти полную анкету
+            </Button>
+            <Button Height="20"
+                    Width="100"
+                    Margin="690,475,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Click="ClosedWindow">
+                Сохранить
+            </Button>
         </Grid>
     </Grid>
 </Window>
