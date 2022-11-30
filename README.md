@@ -20,40 +20,40 @@
     
         Код:
         
-        create table users1 (
-        
-          user_id integer primary key not null,
-          
-          user_name varchar(64) not null,
-          
-          user_surname varchar(64),
-          
-          user_patronymic varchar(64),
-          
-          user_age integer not null,
-          
-          user_sex varchar(64),
-          
-          user_temperament varchar(64),
-          
-          user_character varchar(64),
-          
-          user_login varchar(64) not null,
-          
-          user_password varchar(64) not null,
-          
-          user_nick varchar(64) not null,
-          
-          user_favorite varchar(1024),
-          
-          user_picture varchar(256) not null,
-          
-          user_role varchar(64),
-          
-          user_interests varchar(1024),
-          
-          user_info varchar(1024),
-          
-          user_type varchar(64)
-          
-        )
+          create table users1 (
+
+            user_id integer primary key not null,
+
+            user_name varchar(64) not null,
+
+            user_surname varchar(64),
+
+            user_patronymic varchar(64),
+
+            user_age integer not null,
+
+            user_sex varchar(64),
+
+            user_temperament varchar(64),
+
+            user_character varchar(64),
+
+            user_login varchar(64) not null,
+
+            user_password varchar(64) not null,
+
+            user_nick varchar(64) not null,
+
+            user_favorite varchar(1024),
+
+            user_picture varchar(256) not null,
+
+            user_role varchar(64),
+
+            user_interests varchar(1024),
+
+            user_info varchar(1024),
+
+            user_type varchar(64)
+
+          )
