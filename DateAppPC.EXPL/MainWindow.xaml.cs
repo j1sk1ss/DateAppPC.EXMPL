@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,12 +9,13 @@ using DateAppPC.EXPL.DATA_BASE;
 using DateAppPC.EXPL.FUNCTIONS;
 using DateAppPC.EXPL.OBJECTS;
 using DateAppPC.EXPL.WINDOWS;
-using Newtonsoft.Json;
 
 namespace DateAppPC.EXPL {
-    public partial class MainWindow : Window {
-        private const string DefaultLogo = 
-            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
+    public partial class MainWindow {
+        public const string StorageLocation =
+            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\";
+
+        public readonly string DefaultLogo = $"{StorageLocation}default.jpg";
         public MainWindow() {
             InitializeComponent();
             UsersData = new UsersData {
@@ -68,17 +68,21 @@ namespace DateAppPC.EXPL {
                 MessageBox.Show($"{e}");
             }
         }
-        private void ShowCard(IReadOnlyList<User> users) {
-            ProfilesGrid.Height = 400 * users.Count;
+        private void ShowCard(IEnumerable<User> users) {
+            var list = new List<User>(users);
+            
+            list.Remove(User);
+            ProfilesGrid.Height = 400 * list.Count + 50;
+            
             ProfilesGrid.Children.Clear();
-            for (var i = 0; i < users.Count; i++) {
-                var user = users[i];
-                if (user == User) continue;
+            for (var i = 0; i < list.Count; i++) {
+                var user = list[i];
+
                 ProfilesGrid.Children.Add(ProfilesViewer.GetProfileCanvas(user, this));
                 
                 var tempUserTemple = ProfilesGrid.Children[^1] as Canvas;
                 tempUserTemple!.VerticalAlignment = VerticalAlignment.Top;
-                tempUserTemple!.Margin = new Thickness(0, i * 400, 0, 0);
+                tempUserTemple!.Margin = new Thickness(0, 100 + i * 400, 0, 0);
             }
         }
         private void AppClosed(object sender, EventArgs e) {
@@ -88,7 +92,7 @@ namespace DateAppPC.EXPL {
         public void AddToFavorite(object sender, RoutedEventArgs e) {
             var name = (sender as Button)!.Name;
 
-            foreach (var user in UsersData.Users.Where(user => name.Contains(user.Name))) {
+            foreach (var user in UsersData.Users.Where(user => name.Contains(user.UserId.ToString()))) {
                 User.Favorite.Add(user.UserId.ToString());
                 break;
             }

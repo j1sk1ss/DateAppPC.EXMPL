@@ -10,7 +10,7 @@ namespace DateAppPC.EXPL.QUESTS {
         public static List<Quest> GetQuestList(Sex type) {
             try {
                 const string questPath = 
-                    "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\QUESTS\\Questions.txt";
+                    "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\QUESTS\\Data\\Questions.txt";
                 var quests = new List<Quest>();
 
                 if (!File.Exists(questPath)) return quests;

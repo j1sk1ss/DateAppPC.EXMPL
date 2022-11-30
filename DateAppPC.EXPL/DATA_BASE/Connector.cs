@@ -9,12 +9,17 @@ using Npgsql;
 
 namespace DateAppPC.EXPL.DATA_BASE {
     public class Connector {
-        public List<User> Users { get; set; }
-        public NpgsqlConnection NpgsqlConnection { get; set; }
+        private NpgsqlConnection NpgsqlConnection { get; set; }
+        
+        private const string Server = "localhost";
+        private const string Port = "5432";
+        private const string Database = "postgres";
+        private const string UserId = "postgres";
+        private const string Password = "1234";
         private void Connect() {
             try {
-                const string connectionCommand = 
-                    "Server=localhost;Port=5432;Database=postgres;User Id=postgres;Password=1234";
+                var connectionCommand = 
+                    $"Server={Server};Port={Port};Database={Database};User Id={UserId};Password={Password}";
                 NpgsqlConnection = new NpgsqlConnection(connectionCommand);
                 NpgsqlConnection.Open();
             }
@@ -22,12 +27,12 @@ namespace DateAppPC.EXPL.DATA_BASE {
                 MessageBox.Show($"{e}");
             }
         }
-
         public void ChangeUserData(User user) {
             try {
                 if (NpgsqlConnection == null) Connect();
 
-                var sqlSetCommand = $"UPDATE users SET " +
+                var sqlSetCommand = 
+                                     "UPDATE users SET " +
                                     $"user_name = '{user.Name}', " +
                                     $"user_surname = '{user.Surname}', " +
                                     $"user_patronymic = '{user.Patronymic}', " +
@@ -46,23 +51,18 @@ namespace DateAppPC.EXPL.DATA_BASE {
                                     $"user_type = '{user.Type}' " +
                                     $"WHERE  user_id = '{user.UserId}'";
                 
-                var command         = new NpgsqlCommand(sqlSetCommand);
-                command.Connection  = NpgsqlConnection;
-                command.CommandType = CommandType.Text;
-                
-                command.ExecuteNonQuery();
+                SendCommand(sqlSetCommand);
                 Disconnect();
             }
             catch (Exception e) {
                 MessageBox.Show($"{e}");
             }
         }
-        
         public void SaveUserData(User user) {
             try {
                 if (NpgsqlConnection == null) Connect();
                 
-                var sqlSetCommand = $"INSERT INTO users values ('{user.UserId}','{user.Name}'," +
+                var sqlSaveCommand = $"INSERT INTO users values ('{user.UserId}','{user.Name}'," +
                                              $"'{user.Surname}','{user.Patronymic}','{user.Age}'," +
                                              $"'{user.Sex.ToString()}','{user.Temperament}','{user.Character}'," +
                                              $"'{user.Login}','{user.Password}','{user.Nick}'," +
@@ -70,11 +70,7 @@ namespace DateAppPC.EXPL.DATA_BASE {
                                              $"'{user.ProfileImage}','{user.Role}','{user.Interests}','{user.Info}'," +
                                              $"'{user.Type}')";
                 
-                var command         = new NpgsqlCommand(sqlSetCommand);
-                command.Connection  = NpgsqlConnection;
-                command.CommandType = CommandType.Text;
-                
-                command.ExecuteNonQuery();
+                SendCommand(sqlSaveCommand);
                 Disconnect();
             }
             catch (Exception e) {
@@ -86,13 +82,11 @@ namespace DateAppPC.EXPL.DATA_BASE {
                 var userList = new List<User>();
                 if (NpgsqlConnection == null) Connect();
                 
-                var command         = new NpgsqlCommand();
+                const string sqlGetCommand = "SELECT * FROM users";
+                
+                var command         = new NpgsqlCommand(sqlGetCommand);
                 command.Connection  = NpgsqlConnection;
                 command.CommandType = CommandType.Text;
-                
-                const string sqlGetCommand = "SELECT * FROM users";
-
-                command.CommandText = sqlGetCommand;
                 
                 var dataAdapter = new NpgsqlDataAdapter(command);
                 var dataSet     = new DataSet();
@@ -122,11 +116,19 @@ namespace DateAppPC.EXPL.DATA_BASE {
         }
         private static User ToUserData(DataRow row) {
             return new User {
-                UserId     = (int)row["user_id"],
-                Name       = row["user_name"].ToString(),
-                Surname    = row["user_surname"].ToString(),
-                Patronymic = row["user_patronymic"].ToString(),
-                Age        = (int)row["user_age"],
+                UserId       = (int)row["user_id"],
+                Name         = row["user_name"].ToString(),
+                Nick         = row["user_nick"].ToString(),                
+                Surname      = row["user_surname"].ToString(),
+                Patronymic   = row["user_patronymic"].ToString(),
+                Age          = (int)row["user_age"],
+                Login        = row["user_login"].ToString(),
+                Password     = row["user_password"].ToString(),    
+                
+                Info         = row["user_info"].ToString(),
+                Interests    = row["user_interests"].ToString(),
+                ProfileImage = row["user_picture"].ToString(),
+                Favorite     = row["user_favorite"].ToString()!.Split(" ").ToList(),          
                 
                 Sex = row["user_sex"].ToString() switch {
                     "Man"   => Sex.Man,
@@ -137,17 +139,18 @@ namespace DateAppPC.EXPL.DATA_BASE {
                 Temperament  = row["user_temperament"].ToString(),
                 Character    = row["user_character"].ToString(),
                 Type         = row["user_type"].ToString(),
-                Role         = row["user_role"].ToString(),
-                Login        = row["user_login"].ToString(),
-                Password     = row["user_password"].ToString(),
-                Nick         = row["user_nick"].ToString(),
-                ProfileImage = row["user_picture"].ToString(),
-                
-                Favorite     = row["user_favorite"].ToString()!.Split(" ").ToList()
+                Role         = row["user_role"].ToString()
             };
         }
-        
-        public void Disconnect() {
+        private void SendCommand(string sqlCommand) {
+            var command         = new NpgsqlCommand(sqlCommand);
+            command.Connection  = NpgsqlConnection;
+            command.CommandType = CommandType.Text;
+
+            command.ExecuteNonQuery();
+            command.Dispose();
+        }
+        private void Disconnect() {
             try {
                 NpgsqlConnection.Close();
             }

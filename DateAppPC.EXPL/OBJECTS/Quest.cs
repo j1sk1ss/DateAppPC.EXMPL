@@ -5,8 +5,7 @@ namespace DateAppPC.EXPL.OBJECTS {
         public Quest() {
             Answers = new List<string>();
         }
-        public string QuestBody { get; set; }
-        public List<string> Answers { get; set; }
-        public Sex Sex { get; set; }
+        public string QuestBody { get; init; }
+        public List<string> Answers { get; }
     }
 }

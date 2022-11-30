@@ -6,6 +6,6 @@ namespace DateAppPC.EXPL.DATA {
         public UsersData() {
             Users = new List<User>();
         }
-        public List<User> Users { get; set; }
+        public List<User> Users { get; init; }
     }
 }

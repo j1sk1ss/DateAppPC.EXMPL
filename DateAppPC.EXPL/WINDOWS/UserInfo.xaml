@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:local="clr-namespace:DateAppPC.EXPL.WINDOWS"
         mc:Ignorable="d"
-        Title="UserInfo" Height="550" Width="800"
+        Title="UserInfo" Height="530" Width="800"
         ResizeMode="NoResize">
     <Grid>
         <Grid x:Name="Preview">
@@ -35,7 +34,7 @@
                     <Label x:Name="PreviewBio"
                            FontSize="10" 
                            Margin="300,90,0,0"
-                           Content="{Binding ElementName=Info, Path=Text}"></Label>
+                           Content="{Binding ElementName=Info, Path=Document.Blocks.FirstBlock}"></Label>
                     <Line X1 = "500" Y1 = "0"
                           X2 = "500" Y2 = "300"
                           Stroke="Black"
@@ -70,11 +69,11 @@
                     Интересы:
             </Label>
             <Label FontSize="15" 
-                   Margin="0,165,0,0">
+                   Margin="0,210,0,0">
                     О себе:
             </Label>
             <Label FontSize="15" 
-                   Margin="0,235,0,0">
+                   Margin="0,295,0,0">
                  Дата рождения:
             </Label>
             <Label FontSize="25" 
@@ -91,14 +90,14 @@
                      Height="20" 
                      VerticalAlignment="Top"  
                      Margin="0,90,550,0"></TextBox>
-            <TextBox x:Name = "Interests" 
-                     Height="20" 
+            <RichTextBox x:Name = "Interests" 
+                     Height="60" 
                      VerticalAlignment="Top"  
-                     Margin="0,145,550,0"></TextBox>
-            <TextBox x:Name = "Info"
-                     Height="20" 
+                     Margin="0,145,550,0"></RichTextBox>
+            <RichTextBox x:Name = "Info"
+                     Height="60" 
                      VerticalAlignment="Top"  
-                     Margin="0,205,550,0"></TextBox>
+                     Margin="0,240,550,0"></RichTextBox>
             
             <Button x:Name = "PictureChooser" 
                     Height="20" 
@@ -111,7 +110,7 @@
             <DatePicker x:Name="Age" 
                         VerticalAlignment="Bottom" 
                         Width="200" 
-                        Margin="0,0,550,190" >
+                        Margin="0,0,550,140" >
             </DatePicker>  
             <Line X1 = "260" Y1 = "0"
                   X2 = "260" Y2 = "500"

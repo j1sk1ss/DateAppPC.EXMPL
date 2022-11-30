@@ -2,14 +2,14 @@
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using DateAppPC.EXPL.OBJECTS;
 using Microsoft.Win32;
 
 namespace DateAppPC.EXPL.WINDOWS {
     public partial class UserInfo {
-        private const string DefaultLogo = 
-            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
         public UserInfo(MainWindow mainWindow, User user) {
             InitializeComponent();
 
@@ -17,12 +17,13 @@ namespace DateAppPC.EXPL.WINDOWS {
             User           = user;
             UserName.Text  = user.Name;
             NickName.Text  = user.Nick;
-            Info.Text      = user.Info;
-            Interests.Text = user.Interests;
+            
+            Info.Document.Blocks.Add(new Paragraph(new Run(user.Info))); 
+            Interests.Document.Blocks.Add(new Paragraph(new Run(user.Interests))); 
         }
-        private MainWindow MainWindow { get; set; }
-        private string LinkToPicture { get; set; }
-        private User User { get; set; }
+        private string LinkToPicture { get; set; }        
+        private MainWindow MainWindow { get; }
+        private User User { get; }
         private void ClosedWindow(object sender, EventArgs e) {
             if (MainWindow.UsersData.Users.Any(user => user.Nick == NickName.Text)) {
                 MessageBox.Show("Никнейм уже занят!");
@@ -31,18 +32,17 @@ namespace DateAppPC.EXPL.WINDOWS {
             
             User.Name      = UserName.Text;
             User.Nick      = NickName.Text;
-            User.Info      = Info.Text;
-            User.Interests = Interests.Text;
+            User.Info      = StringFromRichTextBox(Info);
+            User.Interests = StringFromRichTextBox(Interests);
             User.Age       = DateTime.Now.Year - Age.DisplayDate.Year;
 
-            string link = null;
+            string link;
             if (LinkToPicture != null)
             {
-                link = "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\" +
-                       $"DateAppPC.EXPL\\IMAGES\\{UserName.Text}_{NickName.Text}.jpg";
+                link = $"{MainWindow.StorageLocation}{UserName.Text}_{NickName.Text}.jpg";
                 File.Copy(LinkToPicture, link, true);
             }
-            else link = DefaultLogo;
+            else link = MainWindow.DefaultLogo;
             
             User.ProfileImage = link;
             User.DateOfBirth  = Age.DisplayDate;
@@ -61,6 +61,13 @@ namespace DateAppPC.EXPL.WINDOWS {
             
             LinkToPicture         = openFileDialog.FileName;
             PreviewPicture.Source = new BitmapImage(new Uri(LinkToPicture));
+        }
+        string StringFromRichTextBox(RichTextBox rtb) {
+            TextRange textRange = new TextRange(
+                rtb.Document.ContentStart,
+                rtb.Document.ContentEnd
+            );
+            return textRange.Text;
         }
         private void ExtendedTest(object sender, RoutedEventArgs e) {
             new UserTesting(User).Show();

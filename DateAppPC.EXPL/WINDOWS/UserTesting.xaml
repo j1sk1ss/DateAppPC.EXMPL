@@ -91,7 +91,7 @@
             </ComboBox>
             <Button Height="30"
                     Width="100"
-                    Margin="100,390,0,0"
+                    Margin="100,360,0,0"
                     Click="StartTest">
                 Начать
             </Button>

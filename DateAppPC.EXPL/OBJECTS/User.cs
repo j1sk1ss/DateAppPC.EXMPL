@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace DateAppPC.EXPL.OBJECTS {
     public class User {
-        public User()
-        {
-            Favorite = new List<string>();
-            UserId = new Random().Next();
-            Age = 1;
-            ProfileImage = "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
+        public User() {
+            Favorite     = new List<string>();
+            UserId       = new Random().Next();
+            Age          = 1;
+            ProfileImage = 
+                "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
         }
-        public int UserId { get; set; }
+        public int UserId { get; init; }
         public string Name { get; set; }
         public string Nick { get; set; }
         public string Surname { get; set; }
@@ -25,9 +25,9 @@ namespace DateAppPC.EXPL.OBJECTS {
         public string ProfileImage { get; set; }
         public string Info { get; set; }
         public string Interests { get; set; }
-        public List<string> Favorite { get; set; }
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public List<string> Favorite { get; init; }
+        public string Login { get; init; }
+        public string Password { get; init; }
     }
     public enum Sex {
         Man,

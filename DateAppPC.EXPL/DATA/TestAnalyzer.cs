@@ -7,10 +7,10 @@ using DateAppPC.EXPL.OBJECTS;
 
 namespace DateAppPC.EXPL.DATA {
     public static class TestAnalyzer {
-        private const string CharacterPath = 
-            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\QUESTS\\Character.txt";
+        private const string CharacterPath   = 
+            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\QUESTS\\Data\\Character.txt";
         private const string TemperamentPath = 
-            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\QUESTS\\Temperament.txt";
+            "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\QUESTS\\Data\\Temperament.txt";
         public static string GetCharacter(List<string> answers, AnswerType answerType) {
             try {
                 var path = answerType switch {
@@ -20,10 +20,9 @@ namespace DateAppPC.EXPL.DATA {
                     _ => TemperamentPath
                 };
                 if (!File.Exists(path)) return "null";
-
-                var tempText = "";
+                
                 using var streamReader = new StreamReader(path);
-                tempText = streamReader.ReadToEnd();
+                var tempText = streamReader.ReadToEnd();
 
                 var tempLines = tempText.Split("\n");
                 foreach (var line in tempLines) {
@@ -45,40 +44,20 @@ namespace DateAppPC.EXPL.DATA {
                 return "null";
             }
         }
-        public static string GetRole(string seven, Sex type) {
+        public static string GetRole(string answer, Sex type, int quest) {
             return type switch {
-                Sex.Man => seven switch {
-                    "0" => "Подкаблучник",
-                    "1" => "Добытчик",
-                    "2" => "Домохозяин",
-                    "3" => "Тиран",
+                Sex.Man => answer switch {
+                    "0" => quest == 7 ? "Подкаблучник" : "Хозяин",
+                    "1" => quest == 7 ? "Добытчик"     : "Воин",
+                    "2" => quest == 7 ? "Домохозяин"   : "Подарок",
+                    "3" => quest == 7 ? "Тиран"        : "Авантюрист",
                     _   => "Куколд"
                 },
-                Sex.Woman => seven switch {
-                    "0" => "Мать-курица",
-                    "1" => "Мать-кукушка",
-                    "2" => "Мать-липучка",
-                    "3" => "Мать-интеллектуалка",
-                    _   => "Куколдиха"
-                },
-                _ => "null"
-            };
-        }
-
-        public static string GetType(string eight, Sex type) {
-            return type switch {
-                Sex.Man => eight switch {
-                    "0" => "Хозяин",
-                    "1" => "Воин",
-                    "2" => "Подарок",
-                    "3" => "Авантюрист",
-                    _   => "Куколд"
-                },
-                Sex.Woman => eight switch {
-                    "0" => "Хозяйка",
-                    "1" => "Воин",
-                    "2" => "Приз",
-                    "3" => "Муза",
+                Sex.Woman => answer switch {
+                    "0" => quest == 7 ? "Мать-курица"         : "Хозяйка",
+                    "1" => quest == 7 ? "Мать-кукушка"        : "Воин",
+                    "2" => quest == 7 ? "Мать-липучка"        : "Приз",
+                    "3" => quest == 7 ? "Мать-интеллектуалка" : "Муза",
                     _   => "Куколдиха"
                 },
                 _ => "null"
@@ -88,6 +67,5 @@ namespace DateAppPC.EXPL.DATA {
             Temperament,
             Character
         }
-        public static string GetWish() => "ВИСХ";
     }
 }
