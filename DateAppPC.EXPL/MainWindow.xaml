@@ -100,20 +100,23 @@
             <Button  Width="100" 
                      Height="25" 
                      FontSize="10" 
-                     Margin="0,0,225,350">
+                     Margin="0,0,225,350"
+                     Click="ShowFavorites">
                  ВЫБРАННЫЕ ВАМИ
             </Button>
             <Button  Width="100" 
                      Height="25" 
                      FontSize="10" 
-                     Margin="210,0,225,350">
-                 КТО ВЫБРАЛ ВАС
+                     Margin="210,0,225,350"
+                     Click="ShowCharacterMatches">
+                 ПОДХОДЯЩИЕ
             </Button>
             <Button  Width="100" 
                      Height="25" 
                      FontSize="10" 
-                     Margin="420,0,225,350">
-                 СОВПАДЕНИЯ
+                     Margin="420,0,225,350"
+                     Click="ShowAll">
+                ВСЕ
             </Button>
         </Grid>
     </Grid>

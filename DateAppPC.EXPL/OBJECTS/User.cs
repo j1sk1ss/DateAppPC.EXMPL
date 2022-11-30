@@ -5,8 +5,10 @@ namespace DateAppPC.EXPL.OBJECTS {
     public class User {
         public User()
         {
-            Favorite = new List<int>();
-            UsersFavorite = new List<int>();
+            Favorite = new List<string>();
+            UserId = new Random().Next();
+            Age = 1;
+            ProfileImage = "C:\\Users\\j1sk1ss\\RiderProjects\\DateAppPC.EXPL\\DateAppPC.EXPL\\IMAGES\\default.jpg";
         }
         public int UserId { get; set; }
         public string Name { get; set; }
@@ -17,12 +19,13 @@ namespace DateAppPC.EXPL.OBJECTS {
         public Sex Sex { get; set; }
         public string Temperament { get; set; }
         public string Character { get; set; }
+        public string Role { get; set; }
+        public string Type { get; set; }
         public DateTime DateOfBirth { get; set; }
         public string ProfileImage { get; set; }
         public string Info { get; set; }
         public string Interests { get; set; }
-        public List<int> Favorite { get; set; }
-        public List<int> UsersFavorite { get; set; }
+        public List<string> Favorite { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
     }

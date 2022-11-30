@@ -82,7 +82,7 @@
                    HorizontalAlignment="Center">
                  Быстрая анкета
             </Label>
-            
+            <Image Source=""></Image>
             <TextBox x:Name = "UserName" 
                      Height="20" 
                      VerticalAlignment="Top"  

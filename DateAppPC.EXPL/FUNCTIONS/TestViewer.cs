@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using DateAppPC.EXPL.OBJECTS;
 
 namespace DateAppPC.EXPL.FUNCTIONS {
@@ -12,7 +13,8 @@ namespace DateAppPC.EXPL.FUNCTIONS {
                 tempGrid.Children.Add(new RadioButton {
                     Name = $"Answer_{i}",
                     FontSize = 15,
-                    Content = quest.Answers[i]
+                    Content = quest.Answers[i],
+                    Margin = new Thickness(10,20 + i * 40,0,0)
                 });
             }
             return tempGrid;
